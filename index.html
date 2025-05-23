@@ -21,7 +21,7 @@
         // *** IMPORTANT: REPLACE THIS URL with the actual path to your set_command.php ***
         // Example: If your domain is example.com and set_command.php is in public_html,
         // it would be "http://example.com/set_command.php"
-        const setCommandScriptUrl = "http://your-web-hosting-domain.com/set_command.php";
+        const setCommandScriptUrl = "https://vikramlendave02.github.io/ESP01_LED_PROJECT/set_command.php";
 
         const responseMessageElement = document.getElementById('responseMessage');
 
@@ -33,7 +33,7 @@
                 const response = await fetch(`${setCommandScriptUrl}?cmd=${command}`);
                 const data = await response.text(); // Get response as text
 
-                if (response.ok) {
+                if (deta) {
                     responseMessageElement.textContent = `Success: ${data}`;
                     responseMessageElement.className = 'success';
                 } else {
