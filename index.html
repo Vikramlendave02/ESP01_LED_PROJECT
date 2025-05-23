@@ -30,7 +30,7 @@
             responseMessageElement.className = ''; // Clear previous classes
 
             try {
-                const response = await fetch(`${setCommandScriptUrl}?cmd=${command}`);
+                const response = await fetch('${setCommandScriptUrl}?cmd=${command}');
                 const data = await response.text(); // Get response as text
 
                 if (deta) {
