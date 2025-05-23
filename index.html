@@ -33,7 +33,7 @@
                 const response = await fetch('${setCommandScriptUrl}?cmd=${command}');
                 const data = await response.text(); // Get response as text
 
-                if (deta) {
+                if (data) {
                     responseMessageElement.textContent = `Success: ${data}`;
                     responseMessageElement.className = 'success';
                 } else {
