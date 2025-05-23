@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP8266 GPIO Control Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>ESP8266 GPIO Control</h1>
+        <p>Control your ESP8266 connected LED (or other GPIO device).</p>
+        <div class="button-group">
+            <button id="onButton" onclick="sendCommand('LED_ON')">Turn LED ON</button>
+            <button id="offButton" onclick="sendCommand('LED_OFF')">Turn LED OFF</button>
+        </div>
+        <p id="responseMessage"></p>
+    </div>
+
+    <script>
+        // *** IMPORTANT: REPLACE THIS URL with the actual path to your set_command.php ***
+        // Example: If your domain is example.com and set_command.php is in public_html,
+        // it would be "http://example.com/set_command.php"
+        const setCommandScriptUrl = "http://your-web-hosting-domain.com/set_command.php";
+
+        const responseMessageElement = document.getElementById('responseMessage');
+
+        async function sendCommand(command) {
+            responseMessageElement.textContent = 'Sending command...';
+            responseMessageElement.className = ''; // Clear previous classes
+
+            try {
+                const response = await fetch(`${setCommandScriptUrl}?cmd=${command}`);
+                const data = await response.text(); // Get response as text
+
+                if (response.ok) {
+                    responseMessageElement.textContent = `Success: ${data}`;
+                    responseMessageElement.className = 'success';
+                } else {
+                    responseMessageElement.textContent = `Error: ${data || 'Failed to send command.'}`;
+                    responseMessageElement.className = 'error';
+                }
+            } catch (error) {
+                responseMessageElement.textContent = `Network Error: ${error.message}`;
+                responseMessageElement.className = 'error';
+            }
+        }
+    </script>
+</body>
+</html>
